@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'ffi_bridge.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await FFIBridge.init();
   runApp(const MyApp());
 }

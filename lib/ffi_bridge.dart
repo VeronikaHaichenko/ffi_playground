@@ -1,6 +1,7 @@
 import 'dart:ffi' as ffi;
 import 'dart:io';
 import 'package:ffi/ffi.dart' as ffi_str;
+import 'package:flutter/material.dart';
 
 typedef _GetBatteryLevelNative = ffi.Float Function();
 typedef _GetPlatformNameNative = ffi.Pointer<ffi_str.Utf8> Function();
@@ -15,6 +16,7 @@ class FFIBridge {
   static late final ffi.DynamicLibrary _lib;
 
   static Future<void> init() async {
+    WidgetsFlutterBinding.ensureInitialized();
     if (Platform.isAndroid) {
       _lib = ffi.DynamicLibrary.open('libnative_bridge.so');
     } else if (Platform.isIOS) {
@@ -22,6 +24,8 @@ class FFIBridge {
     } else {
       throw UnsupportedError('Unsupported platform');
     }
+    await Future.delayed(const Duration(milliseconds: 100));
+    debugPrint('✅ FFI library initialized and waiting done');
   }
 
   static String getDeviceName() {
