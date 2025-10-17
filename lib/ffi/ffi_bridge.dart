@@ -1,13 +1,13 @@
 import 'dart:ffi' as ffi;
 import 'dart:io';
-import 'package:ffi/ffi.dart' as ffi_str;
+import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 
 typedef _GetBatteryLevelNative = ffi.Float Function();
-typedef _GetPlatformNameNative = ffi.Pointer<ffi_str.Utf8> Function();
-typedef _GetDeviceNameNative = ffi.Pointer<ffi_str.Utf8> Function();
-typedef _GetLocaleNative = ffi.Pointer<ffi_str.Utf8> Function();
-typedef _GetCurrentTimeNative = ffi.Pointer<ffi_str.Utf8> Function();
+typedef _GetPlatformNameNative = ffi.Pointer<Utf8> Function();
+typedef _GetDeviceNameNative = ffi.Pointer<Utf8> Function();
+typedef _GetLocaleNative = ffi.Pointer<Utf8> Function();
+typedef _GetCurrentTimeNative = ffi.Pointer<Utf8> Function();
 typedef _PlaySystemSoundNative = ffi.Void Function();
 typedef _SetBrightnessNative = ffi.Void Function(ffi.Float);
 typedef _GetBrightnessNative = ffi.Float Function();
@@ -32,17 +32,17 @@ class FFIBridge {
     final ptr = _lib
         .lookupFunction<
           _GetDeviceNameNative,
-          ffi.Pointer<ffi_str.Utf8> Function()
+          ffi.Pointer<Utf8> Function()
         >('getDeviceName')();
-    return ptr.cast<ffi_str.Utf8>().toDartString();
+    return ptr.cast<Utf8>().toDartString();
   }
 
   static String getLocale() {
     final ptr = _lib
-        .lookupFunction<_GetLocaleNative, ffi.Pointer<ffi_str.Utf8> Function()>(
+        .lookupFunction<_GetLocaleNative, ffi.Pointer<Utf8> Function()>(
           'getLocale',
         )();
-    return ptr.cast<ffi_str.Utf8>().toDartString();
+    return ptr.cast<Utf8>().toDartString();
   }
 
   static double getBatteryLevel() =>
@@ -54,18 +54,18 @@ class FFIBridge {
     final ptr = _lib
         .lookupFunction<
           _GetPlatformNameNative,
-          ffi.Pointer<ffi_str.Utf8> Function()
+          ffi.Pointer<Utf8> Function()
         >('getPlatformName')();
-    return ptr.cast<ffi_str.Utf8>().toDartString();
+    return ptr.cast<Utf8>().toDartString();
   }
 
   static String getCurrentTime() {
     final ptr = _lib
         .lookupFunction<
           _GetCurrentTimeNative,
-          ffi.Pointer<ffi_str.Utf8> Function()
+          ffi.Pointer<Utf8> Function()
         >('getCurrentTime')();
-    return ptr.cast<ffi_str.Utf8>().toDartString();
+    return ptr.cast<Utf8>().toDartString();
   }
 
   static void playSystemSound() {
