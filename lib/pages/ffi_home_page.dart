@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:ffi_playground/ffi/ffi_bridge.dart';
-import 'package:ffi_playground/pages/ai_chat_page.dart';
+import 'package:ffi_playground/pages/ai_chat/ai_chat_page.dart';
 import 'package:flutter/material.dart';
 
 class FfiHomePage extends StatefulWidget {
